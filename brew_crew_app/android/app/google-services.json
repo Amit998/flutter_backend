@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "19462449872",
+    "firebase_url": "https://lucky-brew-crew-ef3cb.firebaseio.com",
+    "project_id": "lucky-brew-crew-ef3cb",
+    "storage_bucket": "lucky-brew-crew-ef3cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19462449872:android:a9a2350d757a888f7b4cd5",
+        "android_client_info": {
+          "package_name": "com.lucky.brew_crew_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "19462449872-5lm1jf8qhj5ebjlmtugni5k4ks6mk88a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAikwVAp0QWIaoD1e3xEZxOfdr9D2ewqk8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "19462449872-5lm1jf8qhj5ebjlmtugni5k4ks6mk88a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
