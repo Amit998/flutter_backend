@@ -1,0 +1,26 @@
+How To Connect With Firebase
+
+Sign In
+Create New Project
+Click On Android
+Package Name android/app/build.gradle -> application id Then Register
+download google service.json
+then save it into android/app/
+
+There Are Two level gradle File Project level and app level
+click on the project level gradle file then paste the classpath 
+then
+click on the app level gradle file then paste the apply plugin and dependencies
+then fininsh
+
+How To Get SHA key
+Open The project into Android Studio
+Then Go to app level gradlefile then click on "Open For Editing Android " into new window
+
+Then Go to gradle in the right side 
+then click android -> Task -> android -> signingReport
+Need 
+Variant - release
+config: release
+Copy SHA1 Then Paste it into Firebase
+Done...
