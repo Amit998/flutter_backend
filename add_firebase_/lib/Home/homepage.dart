@@ -1,4 +1,6 @@
 import 'package:add_firebase_/Home/sign_In.dart';
+import 'package:add_firebase_/Home/splashScreen.dart';
+import 'package:add_firebase_/Pages/CMS.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -8,8 +10,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.black,),
-      body: SignInBody(),
+      // appBar: AppBar(
+      // backgroundColor: Colors.black,
+      // ),
+      // body: SignInBody(),
+      // body: SplashScreen(),
+      body: CMS(),
     );
   }
 }
