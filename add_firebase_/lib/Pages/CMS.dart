@@ -1,3 +1,4 @@
+import 'package:add_firebase_/Pages/CMS_Content.dart';
 import 'package:add_firebase_/variables.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,14 +28,27 @@ class _CMSState extends State<CMS> {
   _addProduct() async {
     print("outside");
     productToAdd = {
-      'name': nameController.text.toString(),
-      'brand': brandController.text.toString(),
-      'price': priceController.text.toString(),
-      'imageUrl': imageUrlController.text.toString(),
+      // 'name': nameController.text.toString(),
+      // 'brand': brandController.text.toString(),
+      // 'price': priceController.text.toString(),
+      // 'imageUrl': imageUrlController.text.toString(),
+      'name': 'Test 4',
+      'brand': "Test 4 brand ",
+      'price': 14500,
+      'imageUrl':
+          "https://images.unsplash.com/photo-1559163499-413811fb2344?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=750&q=80",
     };
     collectionReference
         .add(productToAdd)
         .whenComplete(() => print("Added To Database"));
+  }
+
+  _deleteContent() async {
+    CollectionReference collectionReference =
+        Firestore.instance.collection('products');
+
+    QuerySnapshot querySnapshot = await collectionReference.getDocuments();
+    querySnapshot.documents[0].reference.delete();
   }
 
   @override
@@ -48,6 +62,19 @@ class _CMSState extends State<CMS> {
               Navigator.pop(context);
             },
           ),
+          actions: [
+            Container(
+                margin: EdgeInsets.all(10),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (contect) => CmsContent()));
+                  },
+                  icon: Icon(
+                    Icons.folder,
+                  ),
+                ))
+          ],
           elevation: 0,
         ),
         backgroundColor: primaryColor,
@@ -97,6 +124,27 @@ class _CMSState extends State<CMS> {
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
+                      maxLines: 1,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                InkWell(
+                  onTap: _deleteContent,
+                  child: Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.all(12),
+                    height: 50,
+                    width: 220,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: logoGreen),
+                    child: Text(
+                      "Delete at 2nd position",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.white),
                       maxLines: 1,
                     ),
                   ),
