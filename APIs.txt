@@ -1,0 +1,2 @@
+https://github.com/public-apis/public-apis
+https://ncov2019-admin.firebaseapp.com/#/

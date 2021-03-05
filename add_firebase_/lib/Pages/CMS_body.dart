@@ -161,14 +161,14 @@ class _BodyState extends State<Body> {
                     //   width: 100,
                     //   fit: BoxFit.cover,
                     // ),
-                    // trailing: CachedNetworkImage(
-                    //   imageUrl: 'https://picsum.photos/250?image=9',
-                    // ),
                     trailing: CachedNetworkImage(
-                      placeholder: (context, url) =>
-                          CircularProgressIndicator(),
                       imageUrl: 'https://picsum.photos/250?image=9',
                     ),
+                    // trailing: CachedNetworkImage(
+                    //   placeholder: (context, url) =>
+                    //       CircularProgressIndicator(),
+                    //   imageUrl: 'https://picsum.photos/250?image=9',
+                    // ),
                   );
                 },
               );
