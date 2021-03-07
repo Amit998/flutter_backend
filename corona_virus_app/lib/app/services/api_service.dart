@@ -33,27 +33,39 @@ class APIService {
       uri.toString(),
       headers: {'Authorization': 'Bearer $accessToken'},
     );
+    // print(response.statusCode);
+    // print('Hello');
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body);
+      // print(data);
+
       if (data.isNotEmpty) {
         final Map<String, dynamic> endPointData = data[0];
         final String responseJsonKey = _responseJsonKeys[endPoint];
 
         final int result = endPointData[responseJsonKey];
+
+        print(responseJsonKey);
+
+        // final int result = endPointData['data'];
+
+        // print(endPointData['data']);
+        print(result);
         if (result != null) {
           return result;
         }
       }
     }
-    print('Request $uri faild\nResponse ${response.statusCode} ${response.reasonPhrase} ');
+    print(
+        'Request $uri faild\nResponse ${response.statusCode} ${response.reasonPhrase} ${response.body} ');
     throw response;
   }
 
   static Map<EndPoint, String> _responseJsonKeys = {
     EndPoint.cases: 'cases',
-    EndPoint.casesSuspected: 'casesSuspected',
-    EndPoint.casesConfirmed: 'casesConfirmed',
-    EndPoint.deaths: 'deaths',
-    EndPoint.recovered: 'recovered',
+    EndPoint.casesSuspected: 'data',
+    EndPoint.casesConfirmed: 'data',
+    EndPoint.deaths: 'data',
+    EndPoint.recovered: 'data',
   };
 }

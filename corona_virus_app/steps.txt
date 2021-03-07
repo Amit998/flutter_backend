@@ -1,0 +1,8 @@
+make a api key
+
+then make a EndPoints
+
+API class where we get apiKeys
+then add host,basePath,port
+
+then URI TokenUri
