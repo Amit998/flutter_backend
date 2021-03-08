@@ -1,4 +1,5 @@
 import 'package:corona_virus_app/app/repositories/data_repositories.dart';
+import 'package:corona_virus_app/app/repositories/endPoints_data.dart';
 import 'package:corona_virus_app/app/services/api.dart';
 import 'package:corona_virus_app/app/ui/endPoint_card.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   int _cases;
+  EndPointData _endPointData;
+
   @override
   void initState() {
     super.initState();
@@ -19,9 +22,13 @@ class _DashboardState extends State<Dashboard> {
 
   Future<void> _updateData() async {
     final dataRepository = Provider.of<DataRepository>(context, listen: false);
-    final cases = await dataRepository.getEndPointData(EndPoint.cases);
+    // final cases = await dataRepository.getEndPointData(EndPoint.cases);
+
+    final endPointData = await dataRepository.getAllEndPointData();
+
     setState(() {
-      _cases = cases;
+      // _cases = cases;
+      _endPointData = endPointData;
     });
   }
 
@@ -36,10 +43,13 @@ class _DashboardState extends State<Dashboard> {
         onRefresh: _updateData,
         child: ListView(
           children: [
-            EndPointCard(
-              endPoint: EndPoint.cases,
-              value: _cases,
-            )
+            for (var endPoint in EndPoint.values)
+              EndPointCard(
+                endPoint: endPoint,
+                value: _endPointData != null
+                    ? _endPointData.values[endPoint]
+                    : null,
+              )
           ],
         ),
       ),
