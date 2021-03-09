@@ -8,18 +8,19 @@
 // }
 
 import 'package:corona_virus_app/app/services/api.dart';
+import 'package:corona_virus_app/app/services/endPointData.dart';
 import 'package:flutter/cupertino.dart';
 
 class EndPointData {
-  final Map<EndPoint, int> values;
+  final Map<EndPoint, EndpointData> values;
 
   EndPointData({@required this.values});
 
-  int get cases => values[EndPoint.cases];
-  int get casesSuspected => values[EndPoint.casesSuspected];
-  int get casesConfirmed => values[EndPoint.casesConfirmed];
-  int get deaths => values[EndPoint.deaths];
-  int get recovered => values[EndPoint.recovered];
+  EndpointData get cases => values[EndPoint.cases];
+  EndpointData get casesSuspected => values[EndPoint.casesSuspected];
+  EndpointData get casesConfirmed => values[EndPoint.casesConfirmed];
+  EndpointData get deaths => values[EndPoint.deaths];
+  EndpointData get recovered => values[EndPoint.recovered];
 
   String toString() =>
       ' cases: $cases ,casesSuspected: $casesSuspected ,casesConfirmed: $casesConfirmed ,deaths: $deaths ,recovered: $recovered  ';

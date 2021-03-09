@@ -26,7 +26,7 @@ class API {
         scheme: 'https',
         host: host,
         path: 'token',
-        queryParameters: {'grant_type': 'client_credentials'},
+        // queryParameters: {'grant_type': 'client_credentials'},
       );
 
   Uri endPointUri(EndPoint endPoint) => Uri(

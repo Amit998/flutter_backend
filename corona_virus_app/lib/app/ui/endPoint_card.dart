@@ -2,6 +2,7 @@ import 'package:corona_virus_app/app/repositories/endPoints_data.dart';
 import 'package:corona_virus_app/app/services/api.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 
 class EndPointCardData {
   final String title;
@@ -29,6 +30,14 @@ class EndPointCard extends StatelessWidget {
   };
 
   const EndPointCard({Key key, this.endPoint, this.value}) : super(key: key);
+
+  String get formatteValue {
+    if (value == null) {
+      return '';
+    }
+    var formatedValue = NumberFormat('#,##,###,###').format(value);
+    return formatedValue;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +75,7 @@ class EndPointCard extends StatelessWidget {
                       color: cardData.color,
                     ),
                     Text(
-                      value != null ? value.toString() : ' ',
+                      formatteValue != null ? formatteValue.toString() : ' ',
                       style: Theme.of(context).textTheme.display1.copyWith(
                           color: cardData.color, fontWeight: FontWeight.bold),
                     )
