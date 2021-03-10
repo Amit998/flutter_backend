@@ -6,6 +6,7 @@ import 'package:corona_virus_app/app/services/api.dart';
 import 'package:corona_virus_app/app/services/endPointData.dart';
 import 'package:corona_virus_app/app/ui/endPoint_card.dart';
 import 'package:corona_virus_app/app/ui/last_updated_status_date.dart';
+import 'package:corona_virus_app/app/ui/showAlertDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,11 +17,13 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   int _cases;
-  EndPointData _endPointData;
+  EndPointsData _endPointData;
 
   @override
   void initState() {
     super.initState();
+    final dataRepository = Provider.of<DataRepository>(context, listen: false);
+    _endPointData = dataRepository.getAllEndPointsCachedData();
     _updateData();
   }
 
@@ -36,8 +39,19 @@ class _DashboardState extends State<Dashboard> {
         // _cases = cases;
         _endPointData = endPointData;
       });
-    } on SocketException catch (e) {
-      print(e);
+    } on SocketException catch (_) {
+      showAlerDilog(
+          context: context,
+          title: 'Conttection Error',
+          content: "Could Not retrive data,Please try again later.",
+          defaultActionText: "ok");
+      // print(e);
+    } catch (_) {
+      showAlerDilog(
+          context: context,
+          title: 'Uknown Error',
+          content: "Please Contact support or try again later",
+          defaultActionText: "ok");
     }
   }
 
@@ -45,7 +59,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     final formatter = LastUpdatedFormatedVariable(
         lastUpdated: _endPointData != null
-            ? _endPointData.values[EndPoint.cases].date
+            ? _endPointData.values[EndPoint.cases]?.date
             : null);
     return Scaffold(
       appBar: AppBar(
@@ -68,7 +82,7 @@ class _DashboardState extends State<Dashboard> {
               EndPointCard(
                 endPoint: endPoint,
                 value: _endPointData != null
-                    ? _endPointData.values[endPoint].value
+                    ? _endPointData.values[endPoint]?.value
                     : null,
               )
           ],

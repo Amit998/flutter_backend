@@ -1,6 +1,8 @@
 import 'package:corona_virus_app/app/repositories/endPoints_data.dart';
 import 'package:corona_virus_app/app/services/api.dart';
+import 'package:corona_virus_app/app/services/data_cache.dart';
 import 'package:corona_virus_app/app/services/endPointData.dart';
+import 'package:corona_virus_app/app/ui/endPoint_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 
@@ -8,8 +10,9 @@ import '../services/api_service.dart';
 
 class DataRepository {
   final APIService apiService;
+  final DataCachedService dataCachedService;
 
-  DataRepository({@required this.apiService});
+  DataRepository({this.dataCachedService, @required this.apiService});
 
   String _accessToken;
 
@@ -19,10 +22,18 @@ class DataRepository {
             accessToken: _accessToken, endPoint: endPoint),
       );
 
-  Future<EndPointData> getAllEndPointData() async =>
-      await _getDataRefrestingToken<EndPointData>(
-        onGetData: _getAllEndPointData,
-      );
+  EndPointsData getAllEndPointsCachedData() => dataCachedService.getData();
+  // Check
+
+  // EndPointsData getAllEndpointsCachedData() => dataCacheService.getData();
+
+  Future<EndPointsData> getAllEndPointData() async {
+    final endpointsData = await _getDataRefrestingToken<EndPointsData>(
+      onGetData: _getAllEndPointData,
+    );
+    await dataCachedService.setData(endpointsData);
+    return endpointsData;
+  }
 
   Future<T> _getDataRefrestingToken<T>({Future<T> Function() onGetData}) async {
     try {
@@ -36,11 +47,12 @@ class DataRepository {
         _accessToken = await apiService.getAccessToken();
         return await onGetData();
       }
+
       rethrow;
     }
   }
 
-  Future<EndPointData> _getAllEndPointData() async {
+  Future<EndPointsData> _getAllEndPointData() async {
     final values = await Future.wait([
       apiService.getEndpointData(
           accessToken: _accessToken, endPoint: EndPoint.cases),
@@ -54,7 +66,7 @@ class DataRepository {
           accessToken: _accessToken, endPoint: EndPoint.recovered),
     ]);
 
-    return EndPointData(values: {
+    return EndPointsData(values: {
       EndPoint.cases: values[0],
       EndPoint.casesSuspected: values[1],
       EndPoint.casesConfirmed: values[2],

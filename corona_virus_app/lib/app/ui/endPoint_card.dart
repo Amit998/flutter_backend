@@ -22,7 +22,7 @@ class EndPointCard extends StatelessWidget {
     EndPoint.casesSuspected: EndPointCardData(
         'Suspected Cases', 'assets/suspect.png', Color(0xFFEEDA28)),
     EndPoint.casesConfirmed: EndPointCardData(
-        'casesConfirmed', 'assets/sick.png', Color(0xFFE99600)),
+        'Cases Confirmed', 'assets/sick.png', Color(0xFFE99600)),
     EndPoint.deaths:
         EndPointCardData('deaths', 'assets/Scavenger.png', Color(0xFFE40000)),
     EndPoint.recovered:

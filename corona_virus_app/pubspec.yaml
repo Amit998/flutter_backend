@@ -32,6 +32,7 @@ dependencies:
   provider:
   font_awesome_flutter:
   intl:
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:

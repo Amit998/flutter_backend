@@ -11,4 +11,5 @@ class EndpointData {
 
   @override
   String toString() => 'date: $date, value $value';
+  
 }
