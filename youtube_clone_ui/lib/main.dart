@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:youtube_clone_ui/screens/nav_screeen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -17,8 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           brightness: Brightness.dark,
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-              selectedItemColor: Colors.white)
-            ),
+              selectedItemColor: Colors.white)),
       home: NavScreen(),
     );
   }
