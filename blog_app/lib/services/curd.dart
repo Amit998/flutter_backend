@@ -8,4 +8,9 @@ class CURDModel {
       print(e);
     });
   }
+
+  getData() async {
+    return await Firestore.instance.collection("blogs").snapshots();
+    // return await Firestore.instance.collection("blogs").document();
+  }
 }

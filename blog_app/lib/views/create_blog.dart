@@ -38,6 +38,18 @@ class _CreateBlogState extends State<CreateBlog> {
       setState(() {
         _isloading = true;
       });
+    if(authorName == null){
+      authorName="Anonymus_${randomAlphaNumeric(5)}";
+
+    }
+    if(title == null){
+      title="no_title";
+
+    }
+    if(desc == null){
+      desc="no_description";
+
+    }
       StorageReference firebaseStorageRef = FirebaseStorage.instance
           .ref()
           .child("blogImages")
