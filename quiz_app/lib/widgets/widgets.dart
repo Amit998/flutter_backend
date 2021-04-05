@@ -18,3 +18,19 @@ Widget appBar(BuildContext context) {
         ]),
   );
 }
+
+Widget blueButton({BuildContext context, String label,double buttonWidth}) {
+  return Container(
+    alignment: Alignment.center,
+    height: 50,
+    width: buttonWidth != null? buttonWidth : MediaQuery.of(context).size.width * 0.90,
+    decoration: BoxDecoration(
+        color: Colors.blue, borderRadius: BorderRadius.circular(30)
+        // shape:
+        ),
+    child: Text(
+      "$label",
+      style: TextStyle(color: Colors.white, fontSize: 18),
+    ),
+  );
+}

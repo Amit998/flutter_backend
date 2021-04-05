@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/helper/functions.dart';
 import 'package:quiz_app/services/auth.dart';
-import 'package:quiz_app/views/home/home..dart';
+import 'package:quiz_app/views/home/home.dart';
 
 import 'package:quiz_app/views/login_signup/signin.dart';
 import 'package:quiz_app/widgets/widgets.dart';
@@ -28,6 +29,7 @@ class _SignUpState extends State<SignUp> {
           setState(() {
             _isLoading = false;
           });
+          HelperFunction.saveUserLogedIn(isLoggedIn: true);
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => Home()));
         }
@@ -117,24 +119,10 @@ class _SignUpState extends State<SignUp> {
                       height: 20,
                     ),
                     GestureDetector(
-                      onTap: () {
-                        signUp();
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: 50,
-                        width: MediaQuery.of(context).size.width * 0.90,
-                        decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(30)
-                            // shape:
-                            ),
-                        child: Text(
-                          "Sign Up",
-                          style: TextStyle(color: Colors.white, fontSize: 18),
-                        ),
-                      ),
-                    ),
+                        onTap: () {
+                          signUp();
+                        },
+                        child: blueButton(context: context, label: "Sign Up")),
                     SizedBox(
                       height: 20,
                     ),
