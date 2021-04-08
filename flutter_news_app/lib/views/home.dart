@@ -5,6 +5,9 @@ import 'package:flutter_news_app/helper/news.dart';
 import 'package:flutter_news_app/models/article_model.dart';
 import 'package:flutter_news_app/models/categoryModel.dart';
 import 'package:flutter_news_app/views/article_view.dart';
+import 'package:flutter_news_app/views/blog_tile.dart';
+import 'package:flutter_news_app/views/category_Title.dart';
+import 'package:flutter_news_app/views/category_news.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -100,92 +103,6 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
-    );
-  }
-}
-
-class CategoryTitle extends StatelessWidget {
-  final String imageUrl, categoryName;
-
-  const CategoryTitle({Key key, this.imageUrl, this.categoryName})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        margin: EdgeInsets.only(right: 10),
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: CachedNetworkImage(
-                imageUrl: imageUrl,
-                width: 120,
-                height: 100,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Container(
-                alignment: Alignment.center,
-                width: 120,
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.black12,
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: Text(
-                  categoryName.toString(),
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ))
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class BlogTile extends StatelessWidget {
-  final String imageUrl, title, desc, url;
-
-  const BlogTile(
-      {Key key,
-      @required this.url,
-      @required this.imageUrl,
-      @required this.title,
-      @required this.desc})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ArticleView(url: url)));
-      },
-      child: Container(
-        margin: EdgeInsets.only(bottom: 16),
-        child: Column(
-          children: [
-            ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network(imageUrl)),
-            Text(
-              title,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 8),
-            Text(
-              desc,
-              style: TextStyle(color: Colors.black38),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

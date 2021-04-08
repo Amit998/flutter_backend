@@ -19,11 +19,17 @@ class _OptionTileState extends State<OptionTile> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: Row(
         children: [
           Container(
+            alignment: Alignment.center,
+            width: 30,
+            height: 30,
             decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(38),
                 border: Border.all(
+                    width: 1.5,
                     color: widget.description == widget.optionSelected
                         ? widget.optionSelected == widget.correctAnswer
                             ? Colors.greenAccent
@@ -32,6 +38,7 @@ class _OptionTileState extends State<OptionTile> {
             child: Text(
               "${widget.option}",
               style: TextStyle(
+                  fontSize: 16,
                   color: widget.optionSelected == widget.description
                       ? widget.correctAnswer == widget.optionSelected
                           ? Colors.green.withOpacity(0.7)
@@ -44,7 +51,7 @@ class _OptionTileState extends State<OptionTile> {
           ),
           Text(
             widget.description,
-            style: TextStyle(fontSize: 17, color: Colors.black54),
+            style: TextStyle(fontSize: 16, color: Colors.black54),
           )
         ],
       ),

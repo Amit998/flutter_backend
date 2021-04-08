@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/services/auth.dart';
 import 'package:quiz_app/services/database.dart';
 import 'package:quiz_app/views/home/create_quiz.dart';
 import 'package:quiz_app/views/home/play_quiz.dart';
+import 'package:quiz_app/views/login_signup/signin.dart';
 import 'package:quiz_app/widgets/widgets.dart';
 
 class Home extends StatefulWidget {
@@ -13,6 +15,7 @@ class _HomeState extends State<Home> {
   Stream quizStream;
 
   DatabaseService databaseService = new DatabaseService();
+  AuthService authService = new AuthService();
 
   @override
   void initState() {
@@ -62,6 +65,17 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         brightness: Brightness.light,
+        actions: [
+          IconButton(
+            onPressed: () {
+              authService.signOut();
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => SignIn()));
+            },
+            icon: Icon(Icons.logout),
+            color: Colors.blue,
+          )
+        ],
       ),
       body: quizList(),
       floatingActionButton: FloatingActionButton(

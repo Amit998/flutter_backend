@@ -4,6 +4,7 @@ class QustionModel {
   String option2;
   String option3;
   String option4;
+  String quizId;
   String correctOption;
   bool answered;
 
