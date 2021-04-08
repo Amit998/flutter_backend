@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    print(categories);
+    // print(categories);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

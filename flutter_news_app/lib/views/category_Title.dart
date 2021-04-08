@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/views/category_news.dart';
 
-
 class CategoryTitle extends StatelessWidget {
   final String imageUrl, categoryName;
 
@@ -13,7 +12,7 @@ class CategoryTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushReplacement(
+        Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => Category(categoryName: categoryName)));
