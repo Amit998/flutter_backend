@@ -3,6 +3,7 @@
    <application
         android:label="wallpaper_app"
         android:icon="@mipmap/ic_launcher">
+         <application android:requestLegacyExternalStorage="true" .....>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
