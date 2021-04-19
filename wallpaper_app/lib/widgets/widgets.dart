@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:wallpaper_app/home/image_view.dart';
 import 'package:wallpaper_app/model/wallpaperModel.dart';
@@ -33,10 +34,12 @@ Widget wallpapersList({List<WallpaperModel> wallpapers, context}) {
           return GridTile(
               child: GestureDetector(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ImageView(
-                    imgUrl: wallpaper.src.original,
-                  )));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ImageView(
+                            imgUrl: wallpaper.src.original,
+                          )));
             },
             child: Hero(
               tag: wallpaper.src.original,
@@ -44,9 +47,24 @@ Widget wallpapersList({List<WallpaperModel> wallpapers, context}) {
                 // child: Text("Hi"),
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: Image.network(
-                      wallpaper.src.portrait,
-                      fit: BoxFit.cover,
+                    child:
+                        // Image.network(
+                        //   wallpaper.src.portrait,
+                        //   fit: BoxFit.cover,
+                        // ),
+                        // CachedNetworkImage(
+                        //   imageUrl: wallpaper.src.portrait,
+                        //   fit: BoxFit.cover,
+                        //   progressIndicatorBuilder:
+                        //       (context, url, downloadProgress) =>
+                        //           CircularProgressIndicator(
+                        //               value: downloadProgress.progress),
+                        //   errorWidget: (context, url, error) => Icon(Icons.error),
+                        // ),
+                        CachedNetworkImage(
+                      placeholder: (context, url) =>
+                          Center(child: CircularProgressIndicator()),
+                      imageUrl: wallpaper.src.portrait,
                     )),
               ),
             ),

@@ -2,7 +2,7 @@
 
     package="com.example.wallpaper_app">
    <!-- <application android:requestLegacyExternalStorage="true"/> -->
-   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:remove="android:maxSdkVersion"/>
+   <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:remove="android:maxSdkVersion"/> -->
    <application
         android:label="wallpaper_app"
         android:icon="@mipmap/ic_launcher">

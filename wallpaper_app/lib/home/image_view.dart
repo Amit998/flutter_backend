@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -103,34 +102,25 @@ class _ImageViewState extends State<ImageView> {
   }
 
   _save() async {
-    var status = await Permissions.storage.status;
-           if (status.isUndetermined) {
-                // You can request multiple permissions at once.
-                Map<Permission, PermissionStatus> statuses = await [
-                  Permission.storage,
-                  Permission.camera,
-                ].request();
-                print(statuses[Permission.storage]); // it should print PermissionStatus.granted
-              }
-  //   if (Platform.isAndroid) {
-  //     await _askPermission();
-  //   }
-  //   var response = await Dio()
-  //       .get(widget.imgUrl, options: Options(responseType: ResponseType.bytes));
+    if (Platform.isAndroid) {
+      await _askPermission();
+    }
+    var response = await Dio()
+        .get(widget.imgUrl, options: Options(responseType: ResponseType.bytes));
+    final result =
+        await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
+    print(result);
+    Navigator.pop(context);
+  }
 
-  //   final result = await ImageGallerySaver.saveImage(Uint8List(response.data));
-  //   print(result);
-  //   Navigator.pop(context);
-  // }
-
-  // _askPermission() async {
-  //   if (Platform.isIOS) {
-  //     Map<PermissionGroup, PermissionStatus> permission =
-  //         await PermissionHandler()
-  //             .requestPermissions([PermissionGroup.photos]);
-  //   } else {
-  //     PermissionStatus permission = await PermissionHandler()
-  //         .checkPermissionStatus(PermissionGroup.storage);
-  //   }
+  _askPermission() async {
+    if (Platform.isIOS) {
+      /*Map<PermissionGroup, PermissionStatus> permissions =
+          */
+      await PermissionHandler().requestPermissions([PermissionGroup.photos]);
+    } else {
+      /* PermissionStatus permission = */ await PermissionHandler()
+          .checkPermissionStatus(PermissionGroup.storage);
+    }
   }
 }
