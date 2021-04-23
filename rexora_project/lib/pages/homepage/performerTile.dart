@@ -10,7 +10,7 @@ class PerformerTile extends StatelessWidget {
       alignment: Alignment.topCenter,
       width: 160,
       // height: 140,
-      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 1),
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(

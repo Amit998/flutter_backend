@@ -8,7 +8,7 @@ import 'package:rexora_project/models/performer_model.dart';
 import 'package:rexora_project/models/projectsModel.dart';
 import 'package:rexora_project/models/topics_model.dart';
 import 'package:rexora_project/pages/homepage/performerList.dart';
-import 'package:rexora_project/pages/homepage/performerTile.dart';
+
 import 'package:rexora_project/pages/homepage/views/ProjectList.dart';
 import 'package:rexora_project/pages/homepage/views/categoryList.dart';
 import 'package:rexora_project/pages/homepage/views/heading.dart';
