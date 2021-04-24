@@ -6,6 +6,7 @@ Widget appBarMain(BuildContext context) {
       "assets/images/logo.png",
       height: 50,
     ),
+    
   );
 }
 

@@ -22,7 +22,21 @@ class Directions {
 
     final northeast = data['bounds']['northeast'];
     final southwest = data['bounds']['southwest'];
-    final bounds=LatLngBounds(southwest: southwest, northeast: northeast)
+    final bounds = LatLngBounds(southwest: southwest, northeast: northeast);
 
+    String distance = '';
+    String duration = '';
+
+    if ((data['legs'] as List).isEmpty) {
+      final leg = data['legs'][0];
+      distance = leg['distance']['text'];
+      duration = leg['duration']['text'];
+    }
+
+    return Directions(
+        polylinePoints: PolylinePoints().decodePolyline(data['overview_polyline']['points']),
+        totalDistancel: distance,
+        totalDuration: duration,
+        bounds: bounds);
   }
 }

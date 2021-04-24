@@ -24,6 +24,8 @@ class DirectionRepository {
         'key': googleApiKey
       },
     );
+    print(response);
+    print("object 2");
     if (response.statusCode == 200) {
       return Directions.fromMap(response.data);
     }
