@@ -1,10 +1,14 @@
 import 'package:chatting_application/services/auth.dart';
+import 'package:chatting_application/services/databse.dart';
 import 'package:chatting_application/views/chatRoomScreen.dart';
 import 'package:chatting_application/views/signin.dart';
 import 'package:chatting_application/widget/widgets.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
+  final Function toggle;
+  SignUp(this.toggle);
+
   @override
   _SignUpState createState() => _SignUpState();
 }
@@ -19,7 +23,7 @@ class _SignUpState extends State<SignUp> {
   bool isLoading = false;
 
   final _formkey = GlobalKey<FormState>();
-
+  DatabaseMethod databaseMethod = new DatabaseMethod();
   AuthMethods authMethods = new AuthMethods();
 
   signMeUP() {
@@ -32,6 +36,12 @@ class _SignUpState extends State<SignUp> {
           .signUpWithEmailAndPassword(emailEditingController.text.toString(),
               passwordEditingController.text.toString())
           .then((value) {
+        Map<String, dynamic> userMap = {
+          "user":userNameEditingController.text.toString(),
+          "email":emailEditingController.text.toString(),
+
+        };
+        databaseMethod.uploadUserInfo(userMap);
         // print(value);
         print("$value");
         setState(() {
@@ -39,6 +49,10 @@ class _SignUpState extends State<SignUp> {
         });
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => ChatRoom()));
+      });
+    } else {
+      setState(() {
+        isLoading = false;
       });
     }
   }
@@ -207,17 +221,21 @@ class _SignUpState extends State<SignUp> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SignIn()));
+                              widget.toggle();
+                              // Navigator.pushReplacement(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => SignIn()));
                             },
-                            child: Text(
-                              "Login Here!",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  decoration: TextDecoration.underline),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 10),
+                              child: Text(
+                                "SignIn Here!",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    decoration: TextDecoration.underline),
+                              ),
                             ),
                           )
                         ],

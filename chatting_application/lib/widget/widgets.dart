@@ -6,7 +6,6 @@ Widget appBarMain(BuildContext context) {
       "assets/images/logo.png",
       height: 50,
     ),
-    
   );
 }
 
@@ -26,10 +25,10 @@ InputDecoration textFieldInputDecoration(String hintText) {
 
 TextStyle simpleBlackTextFieldStyle() {
   return TextStyle(
-      color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500);
+      color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500);
 }
 
 TextStyle simpleWhiteTextFieldStyle() {
   return TextStyle(
-      color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500);
+      color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500);
 }

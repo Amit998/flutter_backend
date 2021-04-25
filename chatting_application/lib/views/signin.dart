@@ -5,6 +5,9 @@ import 'package:chatting_application/widget/widgets.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
+  final Function toggleView;
+  SignIn(this.toggleView);
+
   @override
   _SignInState createState() => _SignInState();
 }
@@ -31,6 +34,10 @@ class _SignInState extends State<SignIn> {
         });
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => ChatRoom()));
+      });
+    } else {
+      setState(() {
+        isLoading = false;
       });
     }
   }
@@ -163,17 +170,21 @@ class _SignInState extends State<SignIn> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => SignUp()));
+                                    widget.toggleView();
+                                    // Navigator.pushReplacement(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) => SignUp()));
                                   },
-                                  child: Text(
-                                    "Register Now",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        decoration: TextDecoration.underline),
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(vertical: 10),
+                                    child: Text(
+                                      "Register Now",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          decoration: TextDecoration.underline),
+                                    ),
                                   ),
                                 )
                               ],

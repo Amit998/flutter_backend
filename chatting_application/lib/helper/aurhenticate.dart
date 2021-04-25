@@ -1,5 +1,6 @@
 import 'package:chatting_application/views/chatRoomScreen.dart';
 import 'package:chatting_application/views/signin.dart';
+import 'package:chatting_application/views/signup.dart';
 import 'package:flutter/material.dart';
 
 class Authenticate extends StatefulWidget {
@@ -11,6 +12,7 @@ class _AuthenticateState extends State<Authenticate> {
   bool showSignIn = true;
 
   void toggleView() {
+    print("object");
     setState(() {
       showSignIn = !showSignIn;
     });
@@ -19,9 +21,9 @@ class _AuthenticateState extends State<Authenticate> {
   @override
   Widget build(BuildContext context) {
     if (showSignIn) {
-      return SignIn();
+      return SignIn(toggleView);
     } else {
-      return ChatRoom();
+      return SignUp(toggleView);
     }
   }
 }

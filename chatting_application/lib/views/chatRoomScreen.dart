@@ -1,4 +1,6 @@
+import 'package:chatting_application/helper/aurhenticate.dart';
 import 'package:chatting_application/services/auth.dart';
+import 'package:chatting_application/views/search.dart';
 import 'package:chatting_application/views/signin.dart';
 import 'package:chatting_application/widget/widgets.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +26,23 @@ class _ChatRoomState extends State<ChatRoom> {
               padding: EdgeInsets.all(10),
               onPressed: () {
                 authMethods.signOut();
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (context) => SignIn()));
+                // Navigator.pop(context);
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => Authenticate()));
               },
               icon: Icon(Icons.exit_to_app))
         ],
       ),
       body: Container(),
+      floatingActionButton: FloatingActionButton(
+        tooltip: "Search User",
+        backgroundColor: Theme.of(context).primaryColor,
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => SearchScreen()));
+        },
+        child: Icon(Icons.search),
+      ),
     );
   }
 }
