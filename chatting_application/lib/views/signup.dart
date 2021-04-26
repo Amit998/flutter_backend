@@ -1,3 +1,4 @@
+import 'package:chatting_application/helper/helperfunctions.dart';
 import 'package:chatting_application/services/auth.dart';
 import 'package:chatting_application/services/databse.dart';
 import 'package:chatting_application/views/chatRoomScreen.dart';
@@ -25,6 +26,7 @@ class _SignUpState extends State<SignUp> {
   final _formkey = GlobalKey<FormState>();
   DatabaseMethod databaseMethod = new DatabaseMethod();
   AuthMethods authMethods = new AuthMethods();
+  HelperFunctions helperFunctions = HelperFunctions();
 
   signMeUP() {
     setState(() {
@@ -36,11 +38,19 @@ class _SignUpState extends State<SignUp> {
           .signUpWithEmailAndPassword(emailEditingController.text.toString(),
               passwordEditingController.text.toString())
           .then((value) {
-        Map<String, dynamic> userMap = {
-          "user":userNameEditingController.text.toString(),
-          "email":emailEditingController.text.toString(),
 
+        Map<String, dynamic> userMap = {
+          "user": userNameEditingController.text.toString(),
+          "email": emailEditingController.text.toString(),
+
+          
         };
+
+        // HelperFunctions.saveduserLoggedSharedPreference(true);
+        HelperFunctions.savedUserNameSharedPreference(userNameEditingController.text);
+        HelperFunctions.savedUserEmailSharedPreference(emailEditingController.text);
+        HelperFunctions.saveduserLoggedSharedPreference(true);
+
         databaseMethod.uploadUserInfo(userMap);
         // print(value);
         print("$value");

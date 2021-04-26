@@ -1,7 +1,10 @@
+import 'package:chatting_application/helper/helperfunctions.dart';
 import 'package:chatting_application/services/auth.dart';
+import 'package:chatting_application/services/databse.dart';
 import 'package:chatting_application/views/chatRoomScreen.dart';
 import 'package:chatting_application/views/signup.dart';
 import 'package:chatting_application/widget/widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
@@ -18,22 +21,50 @@ class _SignInState extends State<SignIn> {
 
   AuthMethods authMethods = new AuthMethods();
   bool isLoading = false;
+  DatabaseMethod databaseMethod = new DatabaseMethod();
+  final _formKey = GlobalKey<FormState>();
+  QuerySnapshot snapshotUserInfo;
 
   signMeIn() {
     setState(() {
       isLoading = true;
     });
+
+    databaseMethod.getUserByEmail(emailEditingController.text).then((value) {
+      setState(() {
+        HelperFunctions.saveduserLoggedSharedPreference(true);
+        snapshotUserInfo = value;
+        HelperFunctions.savedUserEmailSharedPreference(
+            snapshotUserInfo.documents[0].data["email"]);
+        HelperFunctions.savedUserNameSharedPreference(
+            snapshotUserInfo.documents[0].data["name"]);
+        print(snapshotUserInfo.documents[0].data["email"]);
+        print(snapshotUserInfo.documents[0].data["name"]);
+        print("check");
+      });
+
+      // print(snapshotUserInfo.documents[0].data["email"]);
+      // print(snapshotUserInfo.documents[0].data["neme"]);
+      // print("check");
+    });
     if (_formKey.currentState.validate()) {
+      // HelperFunctions.savedUserEmailSharedPreference(
+      // emailEditingController.text);
+
       authMethods
           .signInWithEmailAndPssword(emailEditingController.text.toString(),
               passwordEditingController.text.toString())
           .then((value) {
-        print(value);
         setState(() {
           isLoading = false;
         });
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => ChatRoom()));
+
+        if (value != null) {
+          // HelperFunctions.saveduserLoggedSharedPreference(true);
+
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => ChatRoom()));
+        }
       });
     } else {
       setState(() {
@@ -42,7 +73,6 @@ class _SignInState extends State<SignIn> {
     }
   }
 
-  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
