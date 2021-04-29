@@ -24,32 +24,54 @@ class _SearchScreenState extends State<SearchScreen> {
   // Create chatroom send user to conversation screen,pushReplacement
 
   initiateSearch() async {
-    await databaseMethod
-        .getUserByUsername(searchTextEditController.text)
-        .then((value) {
-      setState(() {
-        searchSnapShot = value;
+    if (searchTextEditController.text.isNotEmpty) {
+      await databaseMethod
+          .getUserByUsername(searchTextEditController.text)
+          .then((value) {
+        setState(() {
+          // print("${value} this is search");
+          searchSnapShot = value;
+          print("${searchSnapShot.documents.length} this is search");
+        });
       });
-    });
+    }
+
+    // await databaseMethod
+    //     .getUserByUsername(searchTextEditController.text)
+    //     .then((value) {
+    //   setState(() {
+    //     searchSnapShot = value;
+    //   });
+    // });
   }
 
-  createChatRoomStartConversation({BuildContext context, String username}) {
+  createChatRoomStartConversation(String username) {
     print('${Constants.myName}');
-    if (username != Constants.myName) {
-      List<String> users = [username, Constants.myName];
+    print(username);
 
-      String chatroomId = getChatRoomId(username, Constants.myName);
+    if (searchTextEditController.text.isNotEmpty) {
+      if (username != Constants.myName) {
+        List<String> users = [username, Constants.myName];
+        // print(users);
 
-      Map<String, dynamic> chatRoomMap = {
-        "users": users,
-        "chatroomId": chatroomId
-      };
+        String chatroomId = getChatRoomId(username, Constants.myName);
+        // print(chatroomId);
 
-      DatabaseMethod().createChatRoom(chatroomId, chatRoomMap);
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => ConversationScreen()));
-    } else {
-      print("You cannot send message to yourself");
+        Map<String, dynamic> chatRoomMap = {
+          "users": users,
+          "chatroomId": chatroomId
+        };
+
+        DatabaseMethod().createChatRoom(chatroomId, chatRoomMap);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ConversationScreen(
+                      chatRoomId: chatroomId,
+                    )));
+      } else {
+        print("You cannot send message to yourself");
+      }
     }
   }
 
@@ -68,7 +90,7 @@ class _SearchScreenState extends State<SearchScreen> {
           Spacer(),
           GestureDetector(
             onTap: () {
-              createChatRoomStartConversation(username: userName);
+              createChatRoomStartConversation(userName);
             },
             child: Container(
               decoration: BoxDecoration(
@@ -94,13 +116,13 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   getUserInfo() async {
-    _myName = await HelperFunctions.getUserNameSharedPreference();
+    _myName = await HelperFunctions.getUserEmailSharedPreference();
     setState(() {});
     print("{$_myName} my name");
   }
 
   Widget searchList() {
-    print(searchSnapShot.documents[0].data['name']);
+    // print(searchSnapShot.documents[0].data['name']);
 
     return searchSnapShot != null
         ? ListView.builder(

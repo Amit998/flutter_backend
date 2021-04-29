@@ -37,4 +37,33 @@ class DatabaseMethod {
       print(e.toString());
     });
   }
+
+  Future sendConversationMessages(
+      String chatRoomId, Map<String, dynamic> messageMap) async {
+    await Firestore.instance
+        .collection("ChatRoom")
+        .document(chatRoomId)
+        .collection("chats")
+        .add(messageMap)
+        .catchError((e) {
+      print(e.toString());
+    });
+  }
+
+  Future getChats(String chatRoomId) async {
+    return await Firestore.instance
+        .collection("ChatRoom")
+        .document(chatRoomId)
+        .collection("chats")
+        .orderBy('time', descending: false)
+        .snapshots();
+  }
+
+  Future getChatRooms(String userName) async {
+    // print("${userName} this is username");
+    return await Firestore.instance
+        .collection("ChatRoom")
+        .where("users", arrayContains: userName)
+        .snapshots();
+  }
 }

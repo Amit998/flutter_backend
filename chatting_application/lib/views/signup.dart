@@ -38,22 +38,24 @@ class _SignUpState extends State<SignUp> {
           .signUpWithEmailAndPassword(emailEditingController.text.toString(),
               passwordEditingController.text.toString())
           .then((value) {
-
         Map<String, dynamic> userMap = {
-          "user": userNameEditingController.text.toString(),
+          "name": userNameEditingController.text.toString(),
           "email": emailEditingController.text.toString(),
-
-          
         };
 
         // HelperFunctions.saveduserLoggedSharedPreference(true);
-        HelperFunctions.savedUserNameSharedPreference(userNameEditingController.text);
-        HelperFunctions.savedUserEmailSharedPreference(emailEditingController.text);
-        HelperFunctions.saveduserLoggedSharedPreference(true);
+        print("${userNameEditingController.text} Sign UP");
+        print("${userNameEditingController.text} Sign Up");
+
+        HelperFunctions.savedUserNameSharedPreference(
+            userNameEditingController.text);
+        HelperFunctions.savedUserEmailSharedPreference(
+            emailEditingController.text);
+        HelperFunctions.saveduserLoggedSharedPreference(false);
 
         databaseMethod.uploadUserInfo(userMap);
         // print(value);
-        print("$value");
+        // print("$value");
         setState(() {
           isLoading = false;
         });
