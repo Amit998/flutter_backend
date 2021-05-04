@@ -1,6 +1,8 @@
 // @dart=2.9
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:ecom_app/components/products.dart';
 import 'package:flutter/material.dart';
+import 'components/horizontal_listView.dart';
 
 void main() {
   runApp(new MaterialApp(debugShowCheckedModeBanner: false, home: HomePage()));
@@ -26,9 +28,12 @@ class _HomePageState extends State<HomePage> {
           AssetImage("images/c1.jpg"),
           AssetImage("images/m2.jpg"),
         ],
-        autoplay: false,
+        autoplay: true,
         animationCurve: Curves.fastOutSlowIn,
         animationDuration: Duration(milliseconds: 1000),
+        dotSize: 4.0,
+        // dotColor: Colors.red.withOpacity(0.3),
+        indicatorBgPadding: 8.0,
       ),
     );
 
@@ -44,7 +49,34 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: new ListView(
-        children: [image_carousel],
+        children: [
+          image_carousel,
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Container(
+              alignment: Alignment.bottomLeft,
+              child: new Text(
+                "Categories",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ),
+          ),
+          HorizontalList(),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Container(
+              alignment: Alignment.bottomLeft,
+              child: new Text(
+                "Recent Prodcuts",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ),
+          ),
+          Container(
+            height: 320.0,
+            child: Products(),
+          )
+        ],
       ),
       drawer: myDrawer(),
     );
