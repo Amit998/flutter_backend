@@ -1,13 +1,15 @@
 import 'package:ecom_app/pages/products_details.dart';
 import 'package:flutter/material.dart';
 
-class Products extends StatefulWidget {
+
+
+class Similer_Products extends StatefulWidget {
   @override
-  _ProductsState createState() => _ProductsState();
+  _Similer_ProductsState createState() => _Similer_ProductsState();
 }
 
-class _ProductsState extends State<Products> {
-  var product_List = [
+class _Similer_ProductsState extends State<Similer_Products> {
+  var similer_product_List = [
     {
       "name": "Blazer",
       "picture": "images/products/blazer1.jpeg",
@@ -44,50 +46,32 @@ class _ProductsState extends State<Products> {
       "old_price": 1000,
       "price": 950,
     },
-    {
-      "name": "New Dress",
-      "picture": "images/products/skt1.jpeg",
-      "old_price": 1000,
-      "price": 950,
-    },
-    {
-      "name": "New Dress",
-      "picture": "images/products/skt2.jpeg",
-      "old_price": 1000,
-      "price": 950,
-    },
-    {
-      "name": "Dress 2",
-      "picture": "images/products/dress2.jpeg",
-      "old_price": 1000,
-      "price": 950,
-    },
   ];
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-        itemCount: product_List.length,
+        itemCount: similer_product_List.length,
         gridDelegate:
             new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (BuildContext context, int index) {
-          return Single_Prod(
-            product_name: product_List[index]['name'],
-            product_price: product_List[index]['price'],
-            product_old_price: product_List[index]['old_price'],
-            product_picture: product_List[index]['picture'],
+          return Similer_Single_Prod(
+            product_name: similer_product_List[index]['name'],
+            product_price: similer_product_List[index]['price'],
+            product_old_price: similer_product_List[index]['old_price'],
+            product_picture: similer_product_List[index]['picture'],
           );
         });
   }
 }
 
-class Single_Prod extends StatelessWidget {
+class Similer_Single_Prod extends StatelessWidget {
   final product_name;
   final product_picture;
   final product_old_price;
   final product_price;
 
-  Single_Prod(
+  Similer_Single_Prod(
       {this.product_name,
       this.product_picture,
       this.product_old_price,
