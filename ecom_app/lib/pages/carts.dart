@@ -1,4 +1,6 @@
+import 'package:ecom_app/components/cart_products.dart';
 import 'package:ecom_app/main.dart';
+import 'package:ecom_app/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class Cart extends StatefulWidget {
@@ -24,6 +26,10 @@ class _CartState extends State<Cart> {
           new IconButton(onPressed: () {}, icon: Icon(Icons.search)),
         ],
       ),
+
+      body: CartProducts(),
+
+
       bottomNavigationBar: new Container(
         color: Colors.white,
         child: Row(
