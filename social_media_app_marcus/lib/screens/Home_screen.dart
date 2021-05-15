@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:social_media_app_marcus/data/data.dart';
 import 'package:social_media_app_marcus/models/user_model.dart';
-import 'package:social_media_app_marcus/screens/following_user.dart';
+import 'package:social_media_app_marcus/widgets/following_user.dart';
+import 'package:social_media_app_marcus/widgets/post_carosel.dart';
+import 'package:social_media_app_marcus/widgets/custom_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -10,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
+  PageController _pageController;
   TabController _tabController;
 
   @override
@@ -18,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen>
     super.initState();
 
     _tabController = TabController(length: 2, vsync: this);
+    _pageController = PageController(initialPage: 0, viewportFraction: 0.8);
   }
 
   @override
@@ -54,9 +58,12 @@ class _HomeScreenState extends State<HomeScreen>
           ],
         ),
       ),
+      drawer: CustomDrawer(),
       body: ListView(
         children: [
           FollowingUsers(),
+          PostCarosel(
+              pageController: _pageController, title: "Posts", posts: posts),
         ],
       ),
     );
