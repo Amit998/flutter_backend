@@ -54,7 +54,7 @@ class PostCarosel extends StatelessWidget {
           ),
           Positioned(
             left: 10,
-            right: 30,
+            right: 10,
             bottom: 10,
             child: Container(
               padding: EdgeInsets.all(12),
