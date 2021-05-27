@@ -1,7 +1,11 @@
 import 'package:clock_app/constants/theme_data.dart';
 import 'package:clock_app/data/data.dart';
+import 'package:clock_app/models/alarm_info.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+import '../main.dart';
 
 class AlarmPage extends StatefulWidget {
   @override
@@ -121,7 +125,9 @@ class _AlarmPageState extends State<AlarmPage> {
                     child: Column(
                       children: [
                         FlatButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            // scheduleAlarm();
+                          },
                           child: Image.asset(
                             "assets/add_alarm.png",
                             scale: 1.5,
@@ -144,4 +150,55 @@ class _AlarmPageState extends State<AlarmPage> {
       ),
     );
   }
+
+  void scheduleAlarm(
+      DateTime scheduledNotificationDateTime, AlarmInfo alarmInfo) async {
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'alarm_notif',
+      'alarm_notif',
+      'Channel for Alarm notification',
+      icon: 'avengers',
+      sound: RawResourceAndroidNotificationSound('a_long_cold_sting'),
+      largeIcon: DrawableResourceAndroidBitmap('codex_logo'),
+    );
+
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails(
+        sound: 'a_long_cold_sting.wav',
+        presentAlert: true,
+        presentBadge: true,
+        presentSound: true);
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.schedule(
+        0,
+        'Office',
+        alarmInfo.description,
+        scheduledNotificationDateTime,
+        platformChannelSpecifics);
+  }
+  // void onSaveAlarm() {
+  //   DateTime scheduleAlarmDateTime;
+  //   if (_alarmTime.isAfter(DateTime.now()))
+  //     scheduleAlarmDateTime = _alarmTime;
+  //   else
+  //     scheduleAlarmDateTime = _alarmTime.add(Duration(days: 1));
+
+  //   var alarmInfo = AlarmInfo(
+  //     alarmDateTime: scheduleAlarmDateTime,
+  //     gradientColorIndex: _currentAlarms.length,
+  //     title: 'alarm',
+  //   );
+  //   _alarmHelper.insertAlarm(alarmInfo);
+  //   scheduleAlarm(scheduleAlarmDateTime, alarmInfo);
+  //   Navigator.pop(context);
+  //   loadAlarms();
+  // }
+
+  // void deleteAlarm(int id) {
+  //   _alarmHelper.delete(id);
+  //   //unsubscribe for notification
+  //   loadAlarms();
+  // }
+
 }
