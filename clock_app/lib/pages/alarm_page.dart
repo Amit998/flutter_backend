@@ -3,7 +3,7 @@ import 'package:clock_app/data/data.dart';
 import 'package:clock_app/models/alarm_info.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import '../main.dart';
 
@@ -151,32 +151,33 @@ class _AlarmPageState extends State<AlarmPage> {
     );
   }
 
-  void scheduleAlarm(
-      DateTime scheduledNotificationDateTime, AlarmInfo alarmInfo) async {
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'alarm_notif',
-      'alarm_notif',
-      'Channel for Alarm notification',
-      icon: 'avengers',
-      sound: RawResourceAndroidNotificationSound('a_long_cold_sting'),
-      largeIcon: DrawableResourceAndroidBitmap('codex_logo'),
-    );
+  // void scheduleAlarm(
+  //     DateTime scheduledNotificationDateTime, AlarmInfo alarmInfo) async {
+  //   var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+  //     'alarm_notif',
+  //     'alarm_notif',
+  //     'Channel for Alarm notification',
+  //     icon: 'avengers',
+  //     sound: RawResourceAndroidNotificationSound('a_long_cold_sting'),
+  //     largeIcon: DrawableResourceAndroidBitmap('codex_logo'),
+  //   );
 
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails(
-        sound: 'a_long_cold_sting.wav',
-        presentAlert: true,
-        presentBadge: true,
-        presentSound: true);
-    var platformChannelSpecifics = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+  //   var iOSPlatformChannelSpecifics = IOSNotificationDetails(
+  //       sound: 'a_long_cold_sting.wav',
+  //       presentAlert: true,
+  //       presentBadge: true,
+  //       presentSound: true);
+  //   var platformChannelSpecifics = NotificationDetails(
+  //       androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics
+  //       );
 
-    await flutterLocalNotificationsPlugin.schedule(
-        0,
-        'Office',
-        alarmInfo.description,
-        scheduledNotificationDateTime,
-        platformChannelSpecifics);
-  }
+  //   await flutterLocalNotificationsPlugin.schedule(
+  //       0,
+  //       'Office',
+  //       alarmInfo.description,
+  //       scheduledNotificationDateTime,
+  //       platformChannelSpecifics);
+  // }
   // void onSaveAlarm() {
   //   DateTime scheduleAlarmDateTime;
   //   if (_alarmTime.isAfter(DateTime.now()))
