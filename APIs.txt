@@ -1,2 +1,7 @@
 https://github.com/public-apis/public-apis
 https://ncov2019-admin.firebaseapp.com/#/
+http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline
+
+
+CREATE MODEL FROM HERE
+https://app.quicktype.io/

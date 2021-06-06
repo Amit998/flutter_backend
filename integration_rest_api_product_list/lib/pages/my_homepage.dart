@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
+import 'package:integration_rest_api_product_list/controllers/product_controller.dart';
+import 'package:integration_rest_api_product_list/models/product_list.dart';
+import 'package:integration_rest_api_product_list/pages/product_tile.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
@@ -9,6 +13,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final ProductController productController = Get.put(ProductController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,21 +69,22 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Expanded(
-            child: StaggeredGridView.countBuilder(
-                itemCount: 20,
-                shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
-                mainAxisSpacing: 16,
-                crossAxisSpacing: 16,
-                crossAxisCount: 2,
-                staggeredTileBuilder: (index) => StaggeredTile.fit(1),
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 200,
-                    width: 100,
-                    color: Colors.red,
-                  );
-                }),
+            child: Obx(() {
+              if (productController.isLoading.value) {
+                return Center(child: CircularProgressIndicator());
+              }
+              return StaggeredGridView.countBuilder(
+                  itemCount: productController.productList.length,
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                  crossAxisCount: 2,
+                  staggeredTileBuilder: (index) => StaggeredTile.fit(1),
+                  itemBuilder: (context, index) {
+                    return ProductTile(productController.productList[index]);
+                  });
+            }),
           )
         ],
       ),
