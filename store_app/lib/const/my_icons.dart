@@ -6,7 +6,7 @@ class MyAppIcons {
   static IconData rss = Feather.rss;
   static IconData search = Feather.search;
   static IconData user = Feather.user;
-  static IconData cart = MaterialCommunityIcons.cart;
+  static IconData cart = Feather.shopping_bag;
   static IconData bag = Feather.shopping_bag;
   static IconData trash = Feather.trash;
   static IconData wishlist = Ionicons.ios_heart_empty;

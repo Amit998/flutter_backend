@@ -74,7 +74,7 @@ class _BottomBarState extends State<BottomBar> {
                 BottomNavigationBarItem(
                     icon: Icon(null), title: Text("Search")),
                 BottomNavigationBarItem(
-                    icon: Icon(MyAppIcons.cart), title: Text("Cart")),
+                    icon: Icon(MyAppIcons.bag), title: Text("Cart")),
                 BottomNavigationBarItem(
                     icon: Icon(MyAppIcons.user), title: Text("User")),
               ],
