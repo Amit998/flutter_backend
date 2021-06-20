@@ -134,10 +134,6 @@ class _UserInfoState extends State<UserInfo> {
                     userListView("Phone", "587656757", 1, context),
                     userListView("Shipping Address", "Katwa", 2, context),
                     userListView("Joined Date", "(12/2/2021)", 3, context),
-                    userListView("Email", "Email@gmail.com", 0, context),
-                    userListView("Phone", "587656757", 1, context),
-                    userListView("Shipping Address", "Katwa", 2, context),
-                    userListView("Joined Date", "(12/2/2021)", 3, context),
                     Padding(
                         padding: const EdgeInsets.only(left: 10, top: 10),
                         child: _userTitle("User Settings")),
@@ -200,6 +196,7 @@ class _UserInfoState extends State<UserInfo> {
           transform: Matrix4.identity()..scale(scale),
           alignment: Alignment.center,
           child: FloatingActionButton(
+            backgroundColor: Colors.purple,
             heroTag: "btn1",
             onPressed: () {},
             child: Icon(Icons.camera_alt_outlined),

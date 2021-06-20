@@ -88,6 +88,7 @@ class _BottomBarState extends State<BottomBar> {
         padding: const EdgeInsets.all(8),
         child: FloatingActionButton(
           hoverElevation: 19,
+          backgroundColor: Colors.purple,
           tooltip: 'Search',
           splashColor: Colors.grey,
           elevation: 4,

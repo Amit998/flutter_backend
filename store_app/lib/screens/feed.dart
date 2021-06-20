@@ -17,11 +17,12 @@ class Feeds extends StatelessWidget {
             //   }),
             // )
             StaggeredGridView.countBuilder(
+      padding: EdgeInsets.all(10),
       crossAxisCount: 6,
-      itemCount: 8,
+      itemCount: 10,
       itemBuilder: (BuildContext context, int index) => FeedProducts(),
       staggeredTileBuilder: (int index) =>
-          new StaggeredTile.count(2, index.isEven ? 4 : 5),
+          new StaggeredTile.count(3, index.isEven ? 4 : 5),
       mainAxisSpacing: 8.0,
       crossAxisSpacing: 6.0,
     ));
