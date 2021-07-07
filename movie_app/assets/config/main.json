@@ -1,5 +1,7 @@
 {
-    "API_KEY":"",
-    "BASE_API_URL":"",
-    "BASE_IMAGE_API_URL":""
+    "API_KEY":"fec329d29ac276a3ec7736daa6c19d08",
+    "BASE_API_URL_1":"https://www.themoviedb.org/3",
+    "BASE_API_URL_2":"https://api.themoviedb.org/3/movie/550?",
+    "BASE_IMAGE_API_URL":"https://image.imdb.org/t/p/original/",
+    "API_Read_Access_Token":"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZWMzMjlkMjlhYzI3NmEzZWM3NzM2ZGFhNmMxOWQwOCIsInN1YiI6IjVmMDcwOTNiYjdhYmI1MDAzNWUxNWNjZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.wbOFlVcbMvSfuwxfRMRAvOsDI3uOqd2qEJGtuec4H0U"
 }
