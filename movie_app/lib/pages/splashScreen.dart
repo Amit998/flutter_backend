@@ -1,9 +1,11 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
+import 'package:movie_app/model/app_config.dart';
+import 'package:movie_app/services/http_services.dart';
+import 'package:movie_app/services/movie_service.dart';
 
 class MySplashScreen extends StatefulWidget {
   final VoidCallback onInitializationComplete;
@@ -21,17 +23,29 @@ class _MySplashScreenState extends State<MySplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 2))
-        .then((_) => widget.onInitializationComplete());
+
+    Future.delayed(Duration(seconds: 2)).then(
+        (_) => _setup(context).then((_) => widget.onInitializationComplete()));
   }
 
   Future<void> _setup(BuildContext context) async {
-    final getIt = GetIt.instance();
+    final getIt = GetIt.instance;
 
     final configFile = await rootBundle.loadString("assets/config/main.json");
     final configData = jsonDecode(configFile);
 
-    
+    getIt.registerSingleton<AppConfig>(AppConfig(
+        BASE_API_URL: configData['BASE_API_URL_1'],
+        BASE_IMAGE_API_URL: configData['BASE_IMAGE_API_URL'],
+        API_KEY: configData['API_KEY']));
+
+    getIt.registerSingleton<HTTPService>(
+      HTTPService(),
+    );
+
+    getIt.registerSingleton<MovieService>(
+      MovieService(),
+    );
   }
 
   @override
