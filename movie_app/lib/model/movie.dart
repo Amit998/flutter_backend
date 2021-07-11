@@ -24,7 +24,7 @@ class Movie {
   factory Movie.fromJson(Map<String, dynamic> _json) {
     return Movie(
       name: _json['title'],
-      language: _json['original language'],
+      language: _json['original_language'],
       isAdult: _json['adult'],
       description: _json['overview'],
       posterPath: _json['poster_path'],

@@ -23,15 +23,17 @@ class MainPage extends ConsumerWidget {
 
   Widget _buildUi() {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       body: Container(
-        height: _deviceHeight,
-        width: _deviceWeight,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [_backgroundWidget(), _foregroundWidget()],
-        ),
-      ),
+          height: _deviceHeight,
+          width: _deviceWeight,
+          child: SingleChildScrollView(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [_backgroundWidget(), _foregroundWidget()],
+            ),
+          )),
     );
   }
 
@@ -58,15 +60,15 @@ class MainPage extends ConsumerWidget {
   Widget _foregroundWidget() {
     return Container(
       padding: EdgeInsets.fromLTRB(0, _deviceHeight * 0.02, 0, 9),
-      width: _deviceHeight * 0.88,
+      width: _deviceWeight * 0.88,
       child: Column(
         mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           _topBarWidget(),
           Container(
-            height: _deviceWeight * 0.83,
+            height: _deviceHeight * 0.83,
             padding: EdgeInsets.symmetric(vertical: _deviceHeight * 0.01),
             child: _movieListViewWidget(),
           )
@@ -153,12 +155,12 @@ class MainPage extends ConsumerWidget {
 
     for (var i = 0; i < 20; i++) {
       _movies.add(Movie(
-          name: "Amit",
+          name: "Taurus Film",
           language: "Eng",
           isAdult: false,
           description:
               "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.",
-          posterPath: "/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
+          posterPath: "pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
           backDropPath: "rr7E0NoGKxvbkb89eR1GwfoYjpA.jpg",
           rating: 7.8,
           releaseDate: "12-2-2020"));
@@ -175,7 +177,7 @@ class MainPage extends ConsumerWidget {
                 onTap: () {},
                 child: MoviesTile(
                   movie: _movies[index],
-                  height: _deviceHeight * 0.2,
+                  height: _deviceHeight * 0.20,
                   width: _deviceWeight * 0.85,
                 ),
               ),

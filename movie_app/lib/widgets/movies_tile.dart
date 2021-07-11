@@ -19,6 +19,7 @@ class MoviesTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _moviewPosterWidget(movie.posterUrl()),
+          _movieInfoWidget(),
         ],
       ),
     );
@@ -27,10 +28,61 @@ class MoviesTile extends StatelessWidget {
   Widget _moviewPosterWidget(String _posterUrl) {
     return Container(
       height: height,
-      width: width,
+      width: width * 0.35,
       decoration: BoxDecoration(
           image: DecorationImage(
               image: NetworkImage(_posterUrl), fit: BoxFit.cover)),
+    );
+  }
+
+  Widget _movieInfoWidget() {
+    return Container(
+      height: height,
+      width: width * 0.66,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: width * 0.56,
+                child: Text(
+                  movie.name.toString(),
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400),
+                ),
+              ),
+              Text(
+                movie.rating.toString(),
+                style: TextStyle(fontSize: 22, color: Colors.white),
+              ),
+            ],
+          ),
+          Container(
+            padding: EdgeInsets.only(right: height * 0.02),
+            child: Text(
+              "${movie.language.toUpperCase()} R: ${movie.isAdult} Date ${movie.releaseDate} ",
+              style: TextStyle(color: Colors.white, fontSize: 12),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(right: height * 0.07),
+            child: Text(
+              movie.description,
+              style: TextStyle(color: Colors.white, fontSize: 10),
+              maxLines: 9,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
