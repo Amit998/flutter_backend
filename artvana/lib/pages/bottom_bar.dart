@@ -2,6 +2,7 @@ import 'package:artvana/pages/gallery_page.dart';
 import 'package:artvana/pages/home_page.dart';
 import 'package:artvana/pages/profile_details.dart.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BottomBar extends StatefulWidget {
   @override
@@ -52,10 +53,24 @@ class _BottomBarState extends State<BottomBar> {
             currentIndex: _selectedPage,
             items: [
               BottomNavigationBarItem(
-                  icon: Icon(Icons.home), title: Text("Home")),
+                  icon: Icon(FontAwesomeIcons.home), title: Text("Home")),
               BottomNavigationBarItem(icon: Icon(null), title: Text("Gallery")),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.person), title: Text("Profile")),
+                  icon: ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: Container(
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      child: Image.asset(
+                        "assets/images/user.jpg",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  title: Text("Profile")),
             ],
           ),
         ),
@@ -70,7 +85,7 @@ class _BottomBarState extends State<BottomBar> {
           tooltip: 'Gallery',
           splashColor: Colors.blueGrey,
           elevation: 4,
-          child: Icon(Icons.image),
+          child: Icon(FontAwesomeIcons.images),
           onPressed: () {
             setState(() {
               _selectPage(1);

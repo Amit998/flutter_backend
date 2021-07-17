@@ -1,5 +1,6 @@
 import 'package:artvana/model/Image_Details.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DetailsPage extends StatelessWidget {
   final ImageDetails imageDetails;
@@ -26,18 +27,21 @@ class DetailsPage extends StatelessWidget {
                             image: AssetImage(imageDetails.imagePath),
                             fit: BoxFit.cover)),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                        margin: EdgeInsets.only(top: 50, left: 20),
-                        child: Icon(
-                          Icons.arrow_back_ios_new_sharp,
-                          color: Colors.white,
-                          size: 40,
-                        )),
-                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomIconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icons.arrow_back_ios,
+                      ),
+                      CustomIconButton(
+                        onPressed: () {},
+                        icon: FontAwesomeIcons.download,
+                      ),
+                    ],
+                  )
                 ],
               ),
             )),
@@ -67,20 +71,20 @@ class DetailsPage extends StatelessWidget {
                           height: 10,
                         ),
                         Text(
-                          'By ${imageDetails.imageTitle.toString()} ',
+                          'By Bratati Banerjee ',
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w600),
                         ),
                         SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          'Price ${imageDetails.imagePrice.toString()} RS ',
-                          style: TextStyle(
-                              color: Colors.lightBlueAccent,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600),
-                        ),
+                        // Text(
+                        //   'Price ${imageDetails.imagePrice.toString()} RS ',
+                        //   style: TextStyle(
+                        //       color: Colors.lightBlueAccent,
+                        //       fontSize: 16,
+                        //       fontWeight: FontWeight.w600),
+                        // ),
                         SizedBox(
                           height: 10,
                         ),
@@ -100,36 +104,16 @@ class DetailsPage extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Expanded(
-                          child: FlatButton(
-                        onPressed: () {},
-                        color: Colors.blueAccent,
-                        child: Text(
-                          "Buy",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      )),
+                      RoundButtonWithoutIcon(
+                        title: "Buy",
+                      ),
                       SizedBox(
                         width: 10,
                       ),
-                      Expanded(
-                          child: FlatButton(
-                              onPressed: () {},
-                              color: Colors.blueAccent,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Icon(
-                                    Icons.linked_camera,
-                                    color: Colors.red,
-                                  ),
-                                  Text(
-                                    "Like",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ],
-                              ))),
+                      RoundButtonWithIcon(
+                        title: "Like",
+                        icon: FontAwesomeIcons.heartbeat,
+                      ),
                     ],
                   ),
                 ],
@@ -139,5 +123,108 @@ class DetailsPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class CustomIconButton extends StatelessWidget {
+  final Function onPressed;
+  final IconData icon;
+  const CustomIconButton({
+    Key key,
+    @required this.icon,
+    @required this.onPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+          padding: EdgeInsets.all(10),
+          margin: EdgeInsets.only(top: 50, left: 20),
+          child: Icon(
+            icon,
+            color: Colors.white,
+            size: 40,
+          )),
+    );
+  }
+}
+
+class RoundButtonWithIcon extends StatelessWidget {
+  final String title;
+  final IconData icon;
+
+  const RoundButtonWithIcon({Key key, @required this.title, this.icon})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+        child: Container(
+      height: 40,
+      padding: EdgeInsets.all(10),
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      decoration: BoxDecoration(
+          color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+      child: GestureDetector(
+          onTap: () {},
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              SizedBox(
+                width: 10,
+              ),
+              Icon(
+                icon,
+                color: Colors.red,
+              ),
+              Text(
+                title,
+                style: TextStyle(color: Colors.white),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+            ],
+          )),
+    ));
+  }
+}
+
+class RoundButtonWithoutIcon extends StatelessWidget {
+  final String title;
+  final IconData icon;
+
+  const RoundButtonWithoutIcon({Key key, @required this.title, this.icon})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+        child: Container(
+      height: 40,
+      padding: EdgeInsets.all(10),
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      decoration: BoxDecoration(
+          color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+      child: GestureDetector(
+          onTap: () {},
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              SizedBox(
+                width: 10,
+              ),
+              Text(
+                title,
+                style: TextStyle(color: Colors.white),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+            ],
+          )),
+    ));
   }
 }
