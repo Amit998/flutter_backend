@@ -1,0 +1,3 @@
+<?php 
+	$demoOrLive = 1;
+?>

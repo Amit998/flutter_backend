@@ -1,0 +1,3 @@
+RewriteEngine On
+
+RewriteRule ^(home|category|comment|index|ebooks|addebook|addcategory|editbook|editcategory|login|authors|authornews|addauthor|editauthor|push|comment|comment-reply|editpublisher|addpublisher|publishers|language|addlanguage|editlanguage)$ $1.php [NC,L]
